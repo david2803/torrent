@@ -1,0 +1,40 @@
+#import "skin://theme.view"
+
+widget(container_z, {
+    height: 5em;
+
+  ListItemBevel();
+  ListItemHighlight();
+
+  focusable: true;
+  onEvent(activate, navOpen("slideshow:" + $self.url, void, $self, $parent.model, void, $parent.url));
+  onEvent(itemMenu, eventWithProp(defaultInfo, $self));
+
+  widget(container_x, {
+    style: "ListItem";
+    widget(image, {
+      style: "ListItemIcon";
+      source: $self.metadata.icon ?? ("thumb://" + $self.url);
+    });
+    widget(container_y, {
+      filterConstraintX: true;
+      padding: [0,0.5em];
+
+
+      widget(label, {
+        caption: $self.metadata.title;
+        style: "ListItemLabel";
+      });
+      space(1);
+
+      widget(label, {
+        alpha: 0.66;
+        caption:  join("  •  ",
+                       strftime($self.metadata.timestamp, "%F"),
+                       $self.metadata.manufacturer,
+                       $self.metadata.equipment);
+        style: "ListItemLabel";
+      });
+    });
+  });
+});

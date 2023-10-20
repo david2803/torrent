@@ -1,0 +1,77 @@
+#import "skin://theme.view"
+
+widget(displacement, {
+  scaling: [1.04 - iir((isNavFocused() || isHovered()) < 1, 4) * 0.04,
+			1,
+			1];
+
+widget(container_z, {
+
+  height: 3.6em;
+
+  ListItemBevel();
+  ListItemHighlight();
+
+  onEvent(activate, navOpen($self.url, void, $self, $parent.model, void, $parent.url));
+
+  onEvent(itemMenu, eventWithProp(videoInfo, $self));
+  focusable: true;
+
+  widget(container_x, {
+    style: "ListItem";
+
+    widget(image, {
+      style: "ListItemIcon";
+      source: $self.metadata.icon ?? ($self.url + "#cover");
+    });
+
+    widget(container_y, {
+      widget(dummy, {
+        height: 1em;
+      });
+
+      widget(container_x, {
+        filterConstraintX: true;
+
+        widget(label, {
+          caption: $self.metadata.title;
+          filterConstraintX: true;
+          ellipsize: true;
+		  maxlines: 2;
+        });
+
+        widget(label, {
+          autohide: true;
+          margin: [1em, 0, 0, 0];
+          caption: value2duration($self.metadata.duration);
+        });
+
+        widget(icon, {
+          alpha: $self.playcount > 0;
+          margin: [0.3em, 0, 0, 0];
+          source: "skin://icons/ic_check_48px.svg";
+        });
+
+      });
+
+      widget(container_y, {
+        alpha: select($self.restartpos > 0, 1, 0);
+        height: 1em;
+        align: center;
+        widget(container_z, {
+          height: 3;
+          widget(quad, {
+            color: 0;
+            alpha: 0.7;
+          });
+          widget(bar, {
+            color1: 1;
+            color2: 1;
+            fill: $self.restartpos / $self.metadata.duration;
+          });
+        });
+      });
+    });
+  });
+});
+});

@@ -1,0 +1,18 @@
+{
+	"description": "This plugin replaces the standalone versions of the three plugins.<br><br>https://api.deanbg.com",
+	"author": "dean",
+	"homepage": "https://api.deanbg.com",
+	"title": "torrents",
+	"synopsis": "A collection of 3 plugins (tGX, ezTV, yts)",
+	"version": "3.0.4",
+	"file": "torrents.js",
+	"showtimeVersion": "5.0.300",
+	"type": "ecmascript",
+	"apiversion": 2,
+	"id": "torrents",
+	"icon": "res/tgx/logo.png",
+	"category": "video",
+	"control": {
+		"uriprefixes": ["tey:"]
+	}
+}

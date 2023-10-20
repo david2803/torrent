@@ -1,3 +1,0 @@
-#include "skin://theme.view"
-
-SearchBar($self.url, $self.metadata.title);
